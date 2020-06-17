@@ -17,12 +17,14 @@
     "colyseus": "^0.13.0",
     "cors": "^2.8.5",
     "express": "^4.14.0",
+    "moment": "^2.26.0",
     "mongodb": "^3.5.9",
     "mongoose": "^5.9.18",
     "serve-index": "^1.8.0",
     "superagent": "^3.8.1",
     "websocket": "^1.0.31",
-    "ws": "^7.3.0"
+    "ws": "^7.3.0",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "ts-node": "^8.3.0",

@@ -8,14 +8,24 @@
 </head>
 
 <body>
+    <div id="datatrade" style="height: 400px; float: right; overflow: scroll;position: relative;">
+
+    </div>
+    <div id="allprice" style="height: 400px; float: right; overflow: scroll;position: absolute;"></div>
 
 <script>
     //  var host = window.document.location.host.replace(/:.*/, '');
+
 
     var client = new Colyseus.Client();
     client.joinOrCreate("exchange").then(room => {
         console.log("joined");
         room.onMessage("trade", function (message){
+            document.getElementById("datatrade").innerHTML += '<p>'+message+'</p>';
+            
+        })
+        room.onMessage("bookticker", function(message){
+            document.getElementById("allprice").innerHTML += '<p>'+message+'</p>';
             console.log(message);
         })
     })
