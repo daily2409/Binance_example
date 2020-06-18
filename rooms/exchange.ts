@@ -9,16 +9,17 @@ export class ExchangeBinance extends Room{
         var url="https://api.binance.com";
         var endpoint = "/api/v3/order";
         var value = 
-        "symbol=TRXUSDT&side=BUY&type=LIMIT&timeInForce=GTC&quantity=0.01&price=0.01637&recvWindow=2000&timestamp="+Date.now();
+        "symbol=TRXUSDT&side=BUY&type=LIMIT&timeInForce=GTC&quantity=0.1&price=0.01635&recvWindow=20000&timestamp="+Date.now();
         var keys = {
-            "akey" : 'YCbWSKGEgRGhOcGO0O6j2YTIJLZsvPpFm4o5S0CqwjkUUQP5iVEOmDtPDhRv82bA',
-            "skey" : 'xLqdSBJVQHI62dMzeagU6mBUsxD7U7KeIQiyn0KO6papijaAxRPbfSgwk9LCMFBw'
+            "apiKey" : 'jIu7n0m09tp1qZCEha8vHoGlhWsFYd53U9n81bXwJsx0BbRF19mmVnLudA8UvQfp',
+            "secretKey" : 'x0SIhco6HtZJz9vaQRZWGABEH3vn8HbVW2Tyl96nfuZL3VHcZ0KJpvBpCpuj1Xgw'
         }
-        var signature = crypto.createHmac('sha256', keys['skey']).update(value).digest("hex");
+        var signature = crypto.createHmac('sha256', keys['secretKey']).update(value).digest("hex");
         var Ourl = url + endpoint + '?' + value +  '&signature=' + signature;
+        console.log(Ourl);
         var ourRequest = new XMLHttpRequest();
         ourRequest.open('POST', Ourl, true);
-        ourRequest.setRequestHeader('X-MBX-APIKEY', keys['skey']);
+        ourRequest.setRequestHeader('X-MBX-APIKEY', keys['secretKey']);
         ourRequest.onload = function(){
             console.log(ourRequest.responseText);
         }
