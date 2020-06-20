@@ -6,12 +6,63 @@
     <title>Document</title>
     <script type="text/javascript" src="https://raw.githack.com/colyseus/colyseus.js/master/dist/colyseus.js"></script>
 </head>
-
+<style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    /* Style the header */
+    .header {
+      background-color: #f1f1f1;
+      padding: 30px;
+      text-align: center;
+      font-size: 35px;
+    }
+    
+    /* Create three equal columns that floats next to each other */
+    .column {
+      float: left;
+      width: 33.33%;
+      padding: 10px;
+      height: 300px; /* Should be removed. Only for demonstration */
+    }
+    
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    
+    /* Style the footer */
+    .footer {
+      background-color: #f1f1f1;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+    @media (max-width: 600px) {
+      .column {
+        width: 100%;
+      }
+    }
+    </style>
 <body>
-    <div id="datatrade" style="height: 400px; float: right; overflow: scroll;position: relative;">
+    <!-- <div id="datatrade" style="height: 400px; float: right; overflow: scroll;position: relative;">
 
     </div>
     <div id="allprice" style="height: 400px; float: right; overflow: scroll;position: absolute;"></div>
+    <div id="buy" style="height: 400px; float: left; overflow: scroll;position: absolute;"></div>
+    <div id="sell" style="height: 400px; float: left; overflow: scroll;position: absolute;"></div> -->
+    <div class="column" id="allprice" style="background-color:#aaa; overflow: scroll;"></div>
+    <div class="column" id="datatrade" style="background-color:#bbb; overflow: scroll;"></div>
+    <div class="column" id="buy" style="background-color:#bbb; overflow: scroll;"></div>
+    <div class="column" id="sell" style="background-color:#ccc; overflow: scroll;"></div>
 
 <script>
     //  var host = window.document.location.host.replace(/:.*/, '');
@@ -20,12 +71,26 @@
     var client = new Colyseus.Client();
     client.joinOrCreate("exchange").then(room => {
         console.log("joined");
+        room.onMessage("ticker", function(message){
+            // console.log(message);
+            document.getElementById("allprice").innerHTML += '<p>'+message+'</p>';
+        })
+
         room.onMessage("trade", function (message){
             document.getElementById("datatrade").innerHTML += '<p>'+message+'</p>';
             
         })
-        room.onMessage("bookticker", function(message){
-            document.getElementById("allprice").innerHTML += '<p>'+message+'</p>';
+        
+        // room.onMessage("bookticker", function(message){
+        //     document.getElementById("allprice").innerHTML += '<p>'+message+'</p>';
+        //     console.log(message);
+        // })
+        room.onMessage("buy", function(message){
+            document.getElementById("buy").innerHTML += '<p>' + message + '</p>';
+            console.log(message);
+        })
+        room.onMessage("sell", function(message){
+            document.getElementById("sell").innerHTML += '<p>' + message + '</p>';
             console.log(message);
         })
     })
