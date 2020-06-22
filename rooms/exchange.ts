@@ -164,8 +164,9 @@ export class ExchangeBinance extends Room{
         const ws2 = new WebSocKet(url);
         
         ws2.on('message', (data: any) => {
-             var buy = JSON.parse(data).a;
-             this.broadcast("buy", buy);
+             var priceBuy = JSON.parse(data).a;
+             var quanlityBuy = JSON.parse(data).A;
+             this.broadcast("buy", priceBuy + quanlityBuy);
             
         })
         
