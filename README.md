@@ -1,7 +1,7 @@
 <div align="center">
  <h3>Document Colyseus </h3>
   <a href="https://github.com/colyseus/colyseus">
-    <img src="https://github.com/colyseus/colyseus/blob/master/media/header.png?raw=true" />
+    <img src="./LG.png" />
   </a>
   <br>
   <br>
